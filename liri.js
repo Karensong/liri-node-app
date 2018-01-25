@@ -2,13 +2,29 @@
 // keys.twitter
 
 var usercommand = process.argv[2];
+var userinput = process.argv[3];
 var keys = require('./key.js');
 var Twitter = require('twitter');
 var client = new Twitter(keys.twitterKeys);// console.log(keys.twitterKeys);
+// var client = new Twitter({
+//   consumer_key: 'hKuYHJ8ecAi632CGukt5QSakv',
+//   consumer_secret: 'MNULHD1TnFgtQjWT995TGFYz9d5yqcCIfij9PucHDbNZRq5xb0',
+//   access_token_key: '956075485666136064-COCIExraeI8ebSbH8IWEoPV91WIf7WL',
+//   access_token_secret: 'FgFdTT92GyJjUep2CuSvy6OYf4FlBs0tErZAQcvqWyWbe'
+// });
 
-// var 
+var Spotify = require('node-spotify-api');
+var spotify = new Spotify(keys.spotifyKeys); 
+// var spotify = new Spotify({
+//   id: '992160f67a50477b87e1a4dd0f86fbaf',
+//   secret: '05e5384e1bcb45b680990bf189953ae2',
+// });
+ 
 
-if (usercommand === "my-tweets") {
+
+
+var runUsercommand = function() {
+	if (usercommand === "my-tweets") {
 	
 var params = {screen_name: 'developerksong'};
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
@@ -16,8 +32,18 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
     console.log(tweets);
   }
 });
+} else if (usercommand === "spotify-this-song" ) {
+	spotify.search({ type: 'track', query: userinput }, function(err, data) {
+  if (err) {
+    return console.log('Error occurred: ' + err);
+  }
+ 
+console.log(data); 
+});
+};
 };
 
+runUsercommand();
 // else if (usercommand === "spotify-this-song") {
 
 // }
