@@ -18,6 +18,11 @@ var spotifyKeys = {
   secret: '05e5384e1bcb45b680990bf189953ae2',
 }
 
+var omdbKeys = {
+  api: '40e9cece'
+}
+
 module.exports = {
 	twitterKeys: twitterKeys,
-	spotifyKeys: spotifyKeys };
+	spotifyKeys: spotifyKeys,
+	omdbKeys: omdbKeys };
